@@ -74,7 +74,7 @@ import org.forgerock.openam.rest.resource.SSOTokenContext;
 import org.forgerock.openam.utils.StringUtils;
 import org.forgerock.services.context.Context;
 import org.forgerock.services.descriptor.Describable;
-import org.forgerock.util.i18n.LocalizableString;
+import org.forgerock.openam.hotfix.LocalizableString;
 import org.forgerock.util.i18n.PreferredLocales;
 import org.forgerock.util.promise.Promise;
 

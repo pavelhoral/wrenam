@@ -104,7 +104,7 @@ import org.forgerock.openam.utils.CollectionUtils;
 import org.forgerock.openam.utils.JsonValueBuilder;
 import org.forgerock.services.context.Context;
 import org.forgerock.services.descriptor.Describable;
-import org.forgerock.util.i18n.LocalizableString;
+import org.forgerock.openam.hotfix.LocalizableString;
 import org.forgerock.util.promise.Promise;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
