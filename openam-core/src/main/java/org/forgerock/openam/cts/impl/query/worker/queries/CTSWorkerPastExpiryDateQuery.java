@@ -28,6 +28,7 @@ import org.forgerock.openam.sm.datalayer.api.DataLayer;
 import org.forgerock.openam.sm.datalayer.api.query.QueryBuilder;
 import org.forgerock.openam.sm.datalayer.api.query.QueryFactory;
 import org.forgerock.openam.tokens.CoreTokenField;
+import org.forgerock.opendj.ldap.Filter;
 import org.forgerock.util.Reject;
 import org.forgerock.util.query.QueryFilter;
 
@@ -39,7 +40,7 @@ import org.forgerock.util.query.QueryFilter;
  */
 public class CTSWorkerPastExpiryDateQuery<C> extends CTSWorkerBaseQuery {
 
-    private final QueryFactory<C, CoreTokenField> queryFactory;
+    private final QueryFactory<C, Filter> queryFactory;
     private final int pageSize;
 
     @Inject
