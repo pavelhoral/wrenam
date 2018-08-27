@@ -150,7 +150,8 @@
         <jaxb.version>1.0.6</jaxb.version>
         <jaxb1.version>2.0.2</jaxb1.version>
         <jaxrpc-api.version>1.1</jaxrpc-api.version>
-        <jaxrpc-impl.version>1.1.3_01-20160905</jaxrpc-impl.version>
+        <!-- FIXME WREN upgrade to fixed internal version -->
+        <jaxrpc-impl.version>1.1.3_01</jaxrpc-impl.version>
         <jaxrpc-spi.version>1.1.3_01</jaxrpc-spi.version>
         <jdom.version>2.0.1</jdom.version>
         <je.version>5.0.104</je.version>
@@ -513,9 +514,15 @@
             <dependency>
                 <groupId>org.forgerock.commons</groupId>
                 <artifactId>commons-bom</artifactId>
-                <version>21.0.0-alpha-23</version>
+                <version>21.0.0-alpha-6</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <!-- FIXME WREN: Move to commons BOM -->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.9.9</version>
             </dependency>
             <!-- Wren:AM project dependencies -->
             <dependency>
@@ -1304,8 +1311,9 @@
                 <version>${jaxrpc-api.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>external</groupId>
+	    <dependency>
+                <!-- FIXME WREN upgrade to fixed internal version -->
+                <groupId>com.sun.xml.rpc</groupId>
                 <artifactId>jaxrpc-impl</artifactId>
                 <version>${jaxrpc-impl.version}</version>
             </dependency>

@@ -31,7 +31,6 @@ import org.forgerock.http.handler.Handlers;
 import org.forgerock.http.io.Buffer;
 import org.forgerock.http.protocol.Request;
 import org.forgerock.http.protocol.Response;
-import org.forgerock.http.swagger.OpenApiRequestFilter;
 import org.forgerock.http.swagger.SwaggerApiProducer;
 import org.forgerock.services.context.Context;
 import org.forgerock.util.Factory;
@@ -76,7 +75,8 @@ final class OpenAMHttpApplication implements DescribedHttpApplication {
                             }
                         });
             }
-        }, new ApiDescriptorFilter(), new OpenApiRequestFilter());
+        // FIXME WREN Removed unsupported filter
+        }, new ApiDescriptorFilter());
     }
 
     @Override

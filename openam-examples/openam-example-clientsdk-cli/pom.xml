@@ -74,7 +74,8 @@
             <artifactId>commons-logging</artifactId>
         </dependency>
         <dependency>
-            <groupId>external</groupId>
+            <!-- FIXME WREN upgrade to fixed internal version -->
+            <groupId>com.sun.xml.rpc</groupId>
             <artifactId>jaxrpc-impl</artifactId>
         </dependency>
         <dependency>

@@ -18,7 +18,6 @@ package org.forgerock.openam.http;
 
 import static com.sun.identity.shared.Constants.REST_APIS_SERVICE_NAME;
 import static com.sun.identity.shared.Constants.REST_APIS_SERVICE_VERSION;
-import static org.forgerock.http.swagger.OpenApiRequestFilter.API_PARAMETER;
 import static org.forgerock.json.resource.http.HttpUtils.PARAM_CREST_API;
 import static org.forgerock.openam.utils.ServiceConfigUtils.getBooleanAttribute;
 import static org.forgerock.util.promise.Promises.newResultPromise;
@@ -115,7 +114,8 @@ public class ApiDescriptorFilter implements Filter {
     @Override
     public Promise<Response, NeverThrowsException> filter(Context context, Request request, Handler next) {
         Form form = request.getForm();
-        if ((form.containsKey(API_PARAMETER) || form.containsKey(PARAM_CREST_API))
+        // FIXME WREN Removed check for unsupported parameter
+        if (form.containsKey(PARAM_CREST_API)
                 && !State.INSTANCE.isEnabled()) {
             return newResultPromise(new Response(Status.NOT_IMPLEMENTED));
         }
