@@ -19,7 +19,6 @@ package org.forgerock.openam.oauth2.rest;
 import static org.forgerock.json.JsonValue.field;
 import static org.forgerock.json.JsonValue.json;
 import static org.forgerock.json.JsonValue.object;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.cts.api.fields.OAuthTokenField.CLIENT_ID;
 import static org.forgerock.openam.cts.api.fields.OAuthTokenField.EXPIRY_TIME;
 import static org.forgerock.openam.cts.api.fields.OAuthTokenField.ID;
@@ -317,7 +316,7 @@ public class OAuth2UserApplications {
         if (jsonValue.isString()) {
             value.add(jsonValue.asString());
         } else if (jsonValue.isCollection()) {
-            value = jsonValue.as(setOf(String.class));
+            value = jsonValue.asSet(String.class);
         }
         return value;
     }

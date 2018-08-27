@@ -17,7 +17,7 @@
 package org.forgerock.openam.rest;
 
 import org.forgerock.api.models.Schema;
-import org.forgerock.api.models.TranslateJsonSchema;
+import org.forgerock.api.models.TranslateJsonSchemaHotfix;
 import org.forgerock.openam.utils.JsonValueBuilder;
 
 /**
@@ -40,6 +40,7 @@ public class DescriptorUtils {
     public static Schema fromResource(String resource, Class<?> relativeType) {
         return Schema.newBuilder().schema(
                 JsonValueBuilder.fromResource(relativeType, resource)
-                        .as(new TranslateJsonSchema(relativeType.getClassLoader()))).build();
+                        // FIXME WREN see hotfix class javadoc
+                        .as(TranslateJsonSchemaHotfix.newInstance(relativeType.getClassLoader()))).build();
     }
 }

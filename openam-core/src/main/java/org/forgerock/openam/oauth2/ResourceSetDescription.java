@@ -17,7 +17,6 @@
 package org.forgerock.openam.oauth2;
 
 import static org.forgerock.json.JsonValue.*;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.json.JsonValueFunctions.uri;
 
 import java.net.URI;
@@ -25,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.forgerock.json.JsonValue;
-import org.forgerock.json.JsonValueFunctions;
 import org.forgerock.openam.tokens.CoreTokenField;
 import org.forgerock.openam.tokens.Field;
 import org.forgerock.openam.tokens.JsonValueToJsonBytesConverter;
@@ -172,7 +170,7 @@ public class ResourceSetDescription {
      * @return The available scopes.
      */
     public Set<String> getScopes() {
-        return description.get("scopes").as(setOf(String.class));
+        return description.get("scopes").asSet(String.class);
     }
 
     /**

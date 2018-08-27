@@ -18,7 +18,6 @@ package org.forgerock.openam.audit.configuration;
 
 import static java.util.Collections.emptySet;
 import static org.forgerock.json.JsonValue.*;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.audit.AuditConstants.*;
 import static org.forgerock.openam.utils.CollectionUtils.isNotEmpty;
 
@@ -132,7 +131,7 @@ public final class JdbcFieldToColumnDefaultValues extends DefaultValues {
      */
     public static Set<String> getDefaultValues(String topic) {
         if (DEFAULT_VALUES.isDefined(topic)) {
-            return DEFAULT_VALUES.get(topic).as(setOf(String.class));
+            return DEFAULT_VALUES.get(topic).asSet(String.class);
         }
         return emptySet();
     }

@@ -17,7 +17,6 @@
 package org.forgerock.openam.uma;
 
 import static org.forgerock.json.JsonValue.*;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.utils.CollectionUtils.newList;
 
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class PermissionTicket implements UmaToken {
 
     public Set<String> getScopes() {
         JsonValue scopes = contents.get(SCOPES);
-        return scopes == null ? null : scopes.as(setOf(String.class));
+        return scopes == null ? null : scopes.asSet(String.class);
     }
 
     public void setScopes(Set<String> scopes) {

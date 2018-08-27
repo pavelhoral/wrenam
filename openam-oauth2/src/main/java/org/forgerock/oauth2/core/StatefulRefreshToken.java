@@ -18,7 +18,6 @@ package org.forgerock.oauth2.core;
 
 import static java.lang.String.valueOf;
 import static java.util.Collections.singletonList;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.oauth2.core.Utils.stringToSet;
 import static org.forgerock.openam.oauth2.OAuth2Constants.CoreTokenParams.*;
 import static org.forgerock.openam.oauth2.OAuth2Constants.JWTTokenParams.ACR;
@@ -319,7 +318,7 @@ public class StatefulRefreshToken extends StatefulToken implements RefreshToken 
     private Set<String> getParameter(String paramName) {
         final JsonValue param = get(paramName);
         if (param != null) {
-            return param.as(setOf(String.class));
+            return param.asSet(String.class);
         }
         return null;
     }

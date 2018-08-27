@@ -26,7 +26,6 @@ import java.util.Set;
 import static org.forgerock.json.JsonValue.field;
 import static org.forgerock.json.JsonValue.json;
 import static org.forgerock.json.JsonValue.object;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.utils.CollectionUtils.newList;
 
 /**
@@ -154,7 +153,7 @@ public class OpenIdConnectTokenGenerationState {
        }
        return OpenIdConnectTokenGenerationState.builder()
                .authenticationMethodReferences(json.get(AUTHENTICATION_METHOD_REFERENCES).isCollection() ?
-                       json.get(AUTHENTICATION_METHOD_REFERENCES).as(setOf(String.class)) : null)
+                       json.get(AUTHENTICATION_METHOD_REFERENCES).asSet(String.class) : null)
                .authenticationContextClassReference(json.get(AUTHENTICATION_CONTEXT_CLASS_REFERENCE).isString() ?
                        json.get(AUTHENTICATION_CONTEXT_CLASS_REFERENCE).asString() : null)
                .authenticationTimeInSeconds(json.get(AUTHENTICATION_TIME).isNumber() ? json.get(AUTHENTICATION_TIME).asLong() : 0)

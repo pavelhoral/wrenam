@@ -259,11 +259,13 @@ public final class LDAPUtils {
     }
 
     private static ConnectionFactory loadBalanceFactories(List<ConnectionFactory> factories, Options options) {
-        if (options.get(AFFINITY_ENABLED)) {
-            return Connections.newShardedRequestLoadBalancer(factories, options);
-        } else {
-            return Connections.newFailoverLoadBalancer(factories, options);
-        }
+        // FIXME WREN No sharded LB support in DS
+//        if (options.get(AFFINITY_ENABLED)) {
+//            return Connections.newShardedRequestLoadBalancer(factories, options);
+//        } else {
+//            return Connections.newFailoverLoadBalancer(factories, options);
+//        }
+        return Connections.newFailoverLoadBalancer(factories, options);
     }
 
     /**

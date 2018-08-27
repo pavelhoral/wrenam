@@ -16,7 +16,6 @@
 
 package org.forgerock.oauth2.core;
 
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.oauth2.OAuth2Constants.CoreTokenParams.*;
 import static org.forgerock.openam.utils.CollectionUtils.newList;
 import static org.forgerock.openam.utils.Time.*;
@@ -304,7 +303,7 @@ public class DeviceCode extends JsonValue implements Token {
     private Set<String> getParameter(String paramName) {
         final JsonValue param = get(paramName);
         if (param != null) {
-            return param.as(setOf(String.class));
+            return param.asSet(String.class);
         }
         return null;
     }

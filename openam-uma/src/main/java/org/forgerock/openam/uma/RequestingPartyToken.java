@@ -17,7 +17,6 @@
 package org.forgerock.openam.uma;
 
 import static org.forgerock.json.JsonValue.*;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.utils.CollectionUtils.newList;
 import static org.forgerock.openam.utils.Time.*;
 
@@ -163,7 +162,7 @@ public class RequestingPartyToken implements UmaToken {
             for (JsonValue permission : value) {
                 Permission p = new Permission();
                 p.setResourceSetId(permission.get(RESOURCE_SET_ID).asString());
-                p.setScopes(permission.get(SCOPES).as(setOf(String.class)));
+                p.setScopes(permission.get(SCOPES).asSet(String.class));
                 if (permission.isDefined(EXPIRES)) {
                     p.setExpiryTime(permission.get(EXPIRES).asLong());
                 }

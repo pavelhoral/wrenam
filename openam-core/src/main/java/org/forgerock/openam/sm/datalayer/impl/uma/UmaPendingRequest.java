@@ -19,7 +19,6 @@ package org.forgerock.openam.sm.datalayer.impl.uma;
 import static org.forgerock.json.JsonValue.field;
 import static org.forgerock.json.JsonValue.json;
 import static org.forgerock.json.JsonValue.object;
-import static org.forgerock.json.JsonValueFunctions.setOf;
 import static org.forgerock.openam.utils.CollectionUtils.newList;
 import static org.forgerock.openam.utils.Time.getCalendarInstance;
 
@@ -137,7 +136,7 @@ public class UmaPendingRequest {
     }
 
     public Set<String> getScopes() {
-        return blob.get("scopes").as(setOf(String.class));
+        return blob.get("scopes").asSet(String.class);
     }
 
     public Calendar getRequestedAt() {
