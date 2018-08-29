@@ -333,7 +333,7 @@
                         <phase>initialize</phase>
                         <configuration>
                             <nodeVersion>v4.6.2</nodeVersion>
-                            <npmVersion>3.10.9</npmVersion>
+                            <npmVersion>3.10.10</npmVersion>
                             <downloadRoot>https://nodejs.org/dist/</downloadRoot>
                             <npmDownloadRoot>https://wrensecurity.jfrog.io/wrensecurity/api/npm/npm-virtual/npm/-/</npmDownloadRoot>
                         </configuration>
