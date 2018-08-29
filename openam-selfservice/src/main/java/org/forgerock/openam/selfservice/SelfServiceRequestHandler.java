@@ -38,7 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.inject.Inject;
 
 import org.forgerock.api.models.ApiDescription;
-import org.forgerock.api.models.TranslateJsonSchema;
+import org.forgerock.api.models.TranslateJsonSchemaHotfix;
 import org.forgerock.api.models.VersionedPath;
 import org.forgerock.http.ApiProducer;
 import org.forgerock.json.JsonValue;
@@ -223,7 +223,8 @@ final class SelfServiceRequestHandler<C extends SelfServiceConsoleConfig>
     private JsonValue schemaFromResource(String schemaName) {
         return fromResource(this.getClass(), "SelfServiceRequestHandler." + schemaName + ".schema.json")
                 .as(new UpdateJsonLocalizableStringRefs())
-                .as(new TranslateJsonSchema(this.getClass().getClassLoader()));
+                // FIXME WREN see hotfix class javadoc
+                .as(TranslateJsonSchemaHotfix.newInstance(this.getClass().getClassLoader()));
     }
 
     private class UpdateJsonLocalizableStringRefs implements Function<JsonValue, JsonValue, NeverThrowsException> {
