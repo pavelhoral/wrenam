@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0">
     <display-name>OpenAM Services</display-name>
 
     <listener>
@@ -381,12 +380,12 @@
     </servlet>
 
     <!-- JAX-RS -->
-    <!-- Java defines REST support via the Java Specification Request 311 (JSR). 
-         This specificiation is called JAX-RS (The Java API for RESTful Web Services). 
+    <!-- Java defines REST support via the Java Specification Request 311 (JSR).
+         This specificiation is called JAX-RS (The Java API for RESTful Web Services).
          JAX-RS uses annotations to define the REST relevance of Java classes.
 
-         Jersey is the reference implementation for this specification. 
-         Jersey contains basically a REST server and a REST client. 
+         Jersey is the reference implementation for this specification.
+         Jersey contains basically a REST server and a REST client.
          The core client can be used provides a library to communicate with the server.
     -->
     <servlet>
@@ -1106,10 +1105,11 @@
 
     <!-- servlet declaration -->
 
-    <servlet-mapping>
+    <!-- OIDC WebFinger protocol is disabled by default. To enable it, uncomment the servlet mapping below. -->
+    <!-- <servlet-mapping>
         <servlet-name>WebFinger</servlet-name>
         <url-pattern>/.well-known/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 
     <servlet>
         <servlet-name>OpenAM</servlet-name>

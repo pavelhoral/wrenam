@@ -12,6 +12,7 @@
  * information: "Portions copyright [year] [name of copyright owner]".
  *
  * Copyright 2016 ForgeRock AS.
+ * Portions Copyright 2026 Wren Security
  */
 
 package org.forgerock.openam.core.rest.session.action;
@@ -19,10 +20,10 @@ package org.forgerock.openam.core.rest.session.action;
 import static org.forgerock.json.resource.Responses.newActionResponse;
 import static org.forgerock.util.promise.Promises.newResultPromise;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,8 +89,7 @@ public class LogoutActionHandler implements ActionHandler {
 
         @Override
         public void addCookie(Cookie cookie) {
-            adviceContext.putAdvice(SET_COOKIE_HEADER,
-                    new org.forgerock.caf.http.SetCookieSupport().generateHeader(cookie));
+            adviceContext.putAdvice(SET_COOKIE_HEADER, renderCookieHeader(cookie));
 
         }
 
@@ -102,6 +102,29 @@ public class LogoutActionHandler implements ActionHandler {
         public void addHeader(String name, String value) {
             adviceContext.putAdvice(name, value);
         }
+    }
+
+    public String renderCookieHeader(Cookie cookie) {
+        StringBuilder header = new StringBuilder();
+        header.append(cookie.getName()).append("=").append(cookie.getValue());
+
+        if (cookie.getMaxAge() >= 0) {
+            header.append("; Max-Age=").append(cookie.getMaxAge());
+        }
+        if (cookie.getDomain() != null) {
+            header.append("; Domain=").append(cookie.getDomain());
+        }
+        if (cookie.getPath() != null) {
+            header.append("; Path=").append(cookie.getPath());
+        }
+        if (cookie.getSecure()) {
+            header.append("; Secure");
+        }
+        if (cookie.isHttpOnly()) {
+            header.append("; HttpOnly");
+        }
+
+        return header.toString();
     }
 
     @Override

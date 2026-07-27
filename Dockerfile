@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM debian:bullseye-slim AS project-build
+FROM --platform=$BUILDPLATFORM debian:trixie-slim AS project-build
 
 # Install build dependencies
 RUN \
@@ -31,19 +31,20 @@ RUN \
   unzip openam-distribution/openam-distribution-ssoconfiguratortools/target/SSOConfiguratorTools-$(cat /build/version.txt).zip -d /build/ssoconf
 
 
-FROM tomcat:9-jdk17-temurin
+FROM tomcat:10-jdk17-temurin
 
 # Set environment variables
 ENV \
   WRENAM_HOME="/srv/wrenam" \
   JAVA_OPTS=" \
     --add-exports=java.base/sun.security.tools.keytool=ALL-UNNAMED \
-    --add-exports=java.base/sun.security.x509=ALL-UNNAMED \
     --add-exports=java.management/sun.management=ALL-UNNAMED \
     --add-exports=java.xml/com.sun.org.apache.xerces.internal.dom=ALL-UNNAMED \
+    --add-opens=java.base/java.io=ALL-UNNAMED \
     --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
     --add-opens=java.base/java.net=ALL-UNNAMED \
     --add-opens=java.base/java.util.regex=ALL-UNNAMED \
+    --add-opens=java.base/sun.nio.ch=ALL-UNNAMED \
     -Dcom.sun.identity.configuration.directory=/srv/wrenam \
   " \
   CATALINA_OPTS="-server -Xmx2g -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"

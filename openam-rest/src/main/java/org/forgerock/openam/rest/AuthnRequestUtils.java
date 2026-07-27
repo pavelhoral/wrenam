@@ -15,8 +15,8 @@
  */
 package org.forgerock.openam.rest;
 
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.google.inject.Inject;
 import com.sun.identity.shared.encode.CookieUtils;

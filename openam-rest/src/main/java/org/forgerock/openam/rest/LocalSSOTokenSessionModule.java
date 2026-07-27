@@ -12,24 +12,25 @@
  * information: "Portions copyright [year] [name of copyright owner]".
  *
  * Copyright 2013-2016 ForgeRock AS.
+ * Portions Copyright 2026 Wren Security
  */
 
 package org.forgerock.openam.rest;
 
-import static javax.security.auth.message.AuthStatus.*;
+import static jakarta.security.auth.message.AuthStatus.*;
 import static org.forgerock.util.promise.Promises.newExceptionPromise;
 import static org.forgerock.util.promise.Promises.newResultPromise;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import javax.security.auth.message.AuthException;
-import javax.security.auth.message.AuthStatus;
-import javax.security.auth.message.MessagePolicy;
-import javax.security.auth.message.callback.CallerPrincipalCallback;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.security.auth.message.AuthException;
+import jakarta.security.auth.message.AuthStatus;
+import jakarta.security.auth.message.MessagePolicy;
+import jakarta.security.auth.message.callback.CallerPrincipalCallback;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -161,6 +162,7 @@ public class LocalSSOTokenSessionModule implements AsyncServerAuthModule {
                 SSOToken requesterToken = getFactory().getTokenFromId(requester);
                 if (getFactory().isTokenValid(requesterToken)) {
                     Object o = RestrictedTokenContext.doUsing(requesterToken, new RestrictedTokenAction() {
+                        @Override
                         public Object run() throws Exception {
                             return validate(request, messageInfo, clientSubject);
                         }
@@ -173,15 +175,6 @@ public class LocalSSOTokenSessionModule implements AsyncServerAuthModule {
             }
         }
         return validate(request, messageInfo, clientSubject);
-    }
-
-    /**
-     * Gets the AM cookie name, as set by AM.
-     *
-     * @return The AM cookie name.
-     */
-    private String getCookieHeaderName() {
-        return authUtilsWrapper.getCookieName();
     }
 
     /**
@@ -204,7 +197,7 @@ public class LocalSSOTokenSessionModule implements AsyncServerAuthModule {
 
         String tokenId = getRequestUtils().getTokenId(request);
         if (StringUtils.isEmpty(tokenId)) {
-            tokenId = request.getHeader(getCookieHeaderName());
+            tokenId = request.getHeader(authUtilsWrapper.getCookieHeaderName());
         }
         if (!StringUtils.isEmpty(tokenId)) {
             SSOToken ssoToken = getFactory().getTokenFromId(tokenId);

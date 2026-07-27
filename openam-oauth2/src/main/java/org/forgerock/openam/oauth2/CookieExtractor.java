@@ -16,9 +16,9 @@
 
 package org.forgerock.openam.oauth2;
 
-import javax.inject.Singleton;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.inject.Singleton;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Extracts the value of the cookie from a HttpServletRequest.

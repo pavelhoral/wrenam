@@ -32,10 +32,10 @@ package com.sun.identity.log.service;
 import java.io.ByteArrayInputStream;
 import java.net.InetAddress;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
 
 import com.iplanet.dpro.parser.WebtopParser;
 import com.iplanet.services.comm.server.RequestHandler;

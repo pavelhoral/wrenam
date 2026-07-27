@@ -1,0 +1,103 @@
+publiccodeYmlVersion: "0.5.0"
+
+name: Wren:AM
+applicationSuite: Wren Security
+url: "https://github.com/WrenSecurity/wrenam"
+landingURL: "https://wrensecurity.org/projects/wrenam/"
+logo: "https://wrensecurity.org/publiccode/wrenam-logo.svg"
+roadmap: "https://github.com/WrenSecurity/wrenam/issues"
+
+platforms:
+  - web
+
+categories:
+  - identity-management
+  - it-security
+
+organisation:
+  uri: https://orchi.tech/
+  name: Orchitech s.r.o.
+
+developmentStatus: stable
+
+softwareType: "standalone/web"
+
+description:
+  en:
+    localisedName: Wren:AM
+    shortDescription: >-
+      Access management platform providing adaptive authentication, SSO,
+      federation, and fine-grained authorization for web and API resources.
+
+    longDescription: |
+      Wren:AM is an open-source access management platform from the Wren Security
+      suite. The platform acts as a central enforcement point for authentication
+      and authorization decisions, enabling organizations to secure web applications,
+       APIs, and microservices without modifying the protected resources themselves.
+
+      **Core capabilities include:**
+
+      - **Adaptive authentication** — risk-based, multi-factor, and step-up
+        authentication with a modular authentication chain supporting OATH/TOTP,
+        social login, and custom modules
+      - **Single Sign-On (SSO) and Single Logout (SLO)** — seamless session
+        propagation across domains and applications; cross-domain SSO via
+        federation or agent-based integration
+      - **Federation** — SAML 2.0 acting as Identity Provider or Service
+        Provider; supports metadata exchange and signed/encrypted assertions
+      - **OAuth 2.0 and OpenID Connect** — authorization server issuing access
+        tokens, refresh tokens, and ID tokens; supports authorization code,
+        client credentials, device flow, and token exchange grants; PKCE and
+        JWT profile support
+      - **Fine-grained authorization** — policy-based access decisions evaluating
+        user attributes, session context, environment conditions, and resource
+        attributes; REST-based policy evaluation API for external enforcement
+      - **Session management** — stateful and stateless (JWT) sessions with
+        configurable token lifetimes, concurrent session limits, and session
+        constraint enforcement
+      - **REST and SOAP Security Token Service** — issues, validates, and renews
+        security tokens including SAML assertions, Kerberos tickets, and JWTs
+      - **Multi-tenancy (realms)** — hierarchical realm model allowing distinct
+        authentication policies, identity stores, and federation configurations
+        per business unit or customer
+      - **Scripting and extensibility** — Groovy and JavaScript hooks at
+        authentication, authorization, and token issuance points for custom logic
+
+      Wren:AM is a full-featured identity provider and authorization
+      server for an enterprise environment with thousands of protected resources.
+
+    documentation: "https://docs.wrensecurity.org/wrenam/latest"
+
+    features:
+      - Adaptive and multi-factor authentication with pluggable modules
+      - Single Sign-On and Single Logout across all protected applications
+      - SAML 2.0 Identity Provider and Service Provider federation
+      - OAuth 2.0 authorization server with OpenID Connect support
+      - Fine-grained, policy-based authorization for web and API resources
+      - Stateful and stateless JWT session management
+      - Security Token Service for SAML assertions, Kerberos, and JWTs
+      - Multi-tenant realm model for organizational isolation
+      - Extensible via Groovy and JavaScript scripting hooks
+
+legal:
+  license: CDDL-1.0
+
+maintenance:
+  type: "community"
+
+  contacts:
+    - name: Ondřej Urbánek
+      email: "ondrej.urbanek@orchitech.cz"
+      affiliation: Orchitech s.r.o.
+      phone: "+420 728 365 526"
+
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - en
+    - fr
+    - de
+    - ja
+    - ko
+    - es
+    - zh

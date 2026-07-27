@@ -12,7 +12,7 @@
  * information: "Portions copyright [year] [name of copyright owner]".
  *
  * Copyright 2016 ForgeRock AS.
- * Portions copyright 2024 Wren Security.
+ * Portions copyright 2024-2026 Wren Security.
  */
 
 package org.forgerock.openam.core.rest.session;
@@ -32,6 +32,7 @@ import com.sun.identity.idm.AMIdentity;
 import com.sun.identity.idm.IdRepoException;
 import com.sun.identity.shared.Constants;
 import com.sun.identity.shared.debug.Debug;
+import com.sun.identity.shared.encode.CookieUtils;
 import com.sun.identity.sm.DNMapper;
 import java.util.Collection;
 import java.util.List;
@@ -39,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 import org.forgerock.http.header.CookieHeader;
 import org.forgerock.http.protocol.Cookie;
 import org.forgerock.json.JsonValue;
+import org.forgerock.json.resource.ActionRequest;
 import org.forgerock.json.resource.Request;
 import org.forgerock.json.resource.http.HttpContext;
 import org.forgerock.openam.core.rest.session.query.SessionQueryManager;
@@ -51,7 +53,6 @@ import org.forgerock.openam.utils.StringUtils;
 public class SessionResourceUtil {
 
     private static final Debug LOGGER = Debug.getInstance(SessionConstants.SESSION_DEBUG);
-
 
     public static final String VALID = "valid";
     public static final String IDLE_TIME = "idletime";
@@ -89,6 +90,7 @@ public class SessionResourceUtil {
      * <ol>
      *     <li>Path of the request</li>
      *     <li>URL parameters of the request</li>
+     *     <li>Request body property</li>
      *     <li>Cookies</li>
      *     <li>HTTP headers</li>
      * </ol>
@@ -105,12 +107,16 @@ public class SessionResourceUtil {
             tokenId = getTokenIdFromUrlParam(request);
         }
 
+        if (StringUtils.isEmpty(tokenId) && request instanceof ActionRequest) {
+            tokenId = getTokenIdFromRequest((ActionRequest) request);
+        }
+
         if (StringUtils.isEmpty(tokenId)) {
             tokenId = getTokenIdFromCookie(context, cookieName);
         }
 
         if (StringUtils.isEmpty(tokenId)) {
-            tokenId = getTokenIdFromHeader(context, cookieName);
+            tokenId = getTokenIdFromHeader(context, CookieUtils.getCookieHeaderName(cookieName));
         }
 
         return StringUtils.isEmpty(tokenId) ? null : tokenId;
@@ -122,6 +128,11 @@ public class SessionResourceUtil {
 
     private static String getTokenIdFromUrlParam(Request request) {
         return request.getAdditionalParameter("tokenId");
+    }
+
+    private static String getTokenIdFromRequest(ActionRequest request) {
+        JsonValue tokenId = request.getContent().get("tokenId");
+        return tokenId.isString() ? tokenId.asString() : null;
     }
 
     private static String getTokenIdFromCookie(HttpContext context, String cookieName) {
